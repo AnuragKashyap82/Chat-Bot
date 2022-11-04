@@ -44,6 +44,8 @@ public class AdapterBots extends RecyclerView.Adapter<AdapterBots.HolderBots> {
             holder.botDescTv.setText("Chat with us what ever you want");
         }else if (botName.equals("Image Text Reader")){
             holder.botDescTv.setText("Send us Images with text and wee will scan the text in it");
+        }else if (botName.equals("Image Compressor")){
+            holder.botDescTv.setText("Compress your image in whatever size you want");
         }else {
             holder.botDescTv.setText("To be integrated!!!");
         }

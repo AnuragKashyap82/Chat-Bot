@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import kashyap.anurag.botchats.ImageViewActivity;
 import kashyap.anurag.botchats.Models.ModelMessages;
 import kashyap.anurag.botchats.R;
 
@@ -31,7 +32,7 @@ public class AdapterMessages extends RecyclerView.Adapter<AdapterMessages.Holder
     @NonNull
     @Override
     public HolderMessage onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view  = LayoutInflater.from(context).inflate(R.layout.row_messages_items, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.row_messages_items, parent, false);
         return new HolderMessage(view);
     }
 
@@ -44,20 +45,44 @@ public class AdapterMessages extends RecyclerView.Adapter<AdapterMessages.Holder
         String messageType = modelMessages.getMessageType();
         String imageUrl = modelMessages.getImageUrl();
 
-        if (messageId.equals("SENDER")){
-            if (messageType.equals("image")){
+        if (messageId.equals("SENDER")) {
+            if (messageType.equals("image")) {
                 holder.senderTv.setVisibility(View.GONE);
                 holder.responseTv.setVisibility(View.GONE);
                 holder.imageIv.setVisibility(View.VISIBLE);
                 Picasso.get().load(imageUrl).into(holder.imageIv);
-            }else {
+            } else {
                 holder.responseTv.setVisibility(View.GONE);
                 holder.senderTv.setText(message);
             }
-        }else if (messageId.equals("RESPONSE")){
-            holder.senderTv.setVisibility(View.GONE);
-            holder.responseTv.setText(response);
+        } else if (messageId.equals("RESPONSE")) {
+            if (messageType.equals("image")) {
+                holder.senderTv.setVisibility(View.GONE);
+                holder.responseIv.setVisibility(View.VISIBLE);
+                holder.responseTv.setVisibility(View.GONE);
+                Picasso.get().load(imageUrl).into(holder.responseIv);
+            } else {
+                holder.senderTv.setVisibility(View.GONE);
+                holder.responseTv.setText(response);
+            }
         }
+
+        holder.imageIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ImageViewActivity.class);
+                intent.putExtra("imageUrl", ""+imageUrl);
+                context.startActivity(intent);
+            }
+        });
+        holder.responseIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ImageViewActivity.class);
+                intent.putExtra("imageUrl", ""+imageUrl);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -69,7 +94,7 @@ public class AdapterMessages extends RecyclerView.Adapter<AdapterMessages.Holder
     public class HolderMessage extends RecyclerView.ViewHolder {
 
         private TextView responseTv, senderTv;
-        private ImageView imageIv;
+        private ImageView imageIv, responseIv;
 
         public HolderMessage(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +102,7 @@ public class AdapterMessages extends RecyclerView.Adapter<AdapterMessages.Holder
             responseTv = itemView.findViewById(R.id.responseTv);
             senderTv = itemView.findViewById(R.id.senderTv);
             imageIv = itemView.findViewById(R.id.imageIv);
+            responseIv = itemView.findViewById(R.id.responseIv);
         }
     }
 }

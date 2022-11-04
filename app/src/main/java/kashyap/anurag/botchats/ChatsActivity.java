@@ -14,9 +14,11 @@ import kashyap.anurag.botchats.databinding.ActivityChatsBinding;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -138,6 +141,7 @@ public class ChatsActivity extends AppCompatActivity {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("response", "Hello, Today you are talking to "+randomString+ ". How can I help you");
         hashMap.put("messageId", "RESPONSE");
+        hashMap.put("messageType", "text");
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
         databaseReference.updateChildren(hashMap)
@@ -247,6 +251,7 @@ public class ChatsActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("response", "" + randomString);
                 hashMap.put("messageId", "RESPONSE");
+                hashMap.put("messageType", "text");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                 databaseReference.updateChildren(hashMap)
@@ -274,6 +279,7 @@ public class ChatsActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("response", "" + randomString);
                 hashMap.put("messageId", "RESPONSE");
+                hashMap.put("messageType", "text");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                 databaseReference.updateChildren(hashMap)
@@ -301,6 +307,7 @@ public class ChatsActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("response", "" + randomString);
                 hashMap.put("messageId", "RESPONSE");
+                hashMap.put("messageType", "text");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                 databaseReference.updateChildren(hashMap)
@@ -325,6 +332,7 @@ public class ChatsActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("response", "http://www.google.com");
                 hashMap.put("messageId", "RESPONSE");
+                hashMap.put("messageType", "text");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                 databaseReference.updateChildren(hashMap)
@@ -351,6 +359,7 @@ public class ChatsActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("response", "Opening youtube");
                 hashMap.put("messageId", "RESPONSE");
+                hashMap.put("messageType", "text");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                 databaseReference.updateChildren(hashMap)
@@ -380,6 +389,7 @@ public class ChatsActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("response", "Searching " + key);
                 hashMap.put("messageId", "RESPONSE");
+                hashMap.put("messageType", "text");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                 databaseReference.updateChildren(hashMap)
@@ -417,6 +427,7 @@ public class ChatsActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("response", "" + dateTime);
                 hashMap.put("messageId", "RESPONSE");
+                hashMap.put("messageType", "text");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                 databaseReference.updateChildren(hashMap)
@@ -440,6 +451,7 @@ public class ChatsActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("response", "IDK");
                 hashMap.put("messageId", "RESPONSE");
+                hashMap.put("messageType", "text");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                 databaseReference.updateChildren(hashMap)
@@ -464,6 +476,32 @@ public class ChatsActivity extends AppCompatActivity {
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("response", "Send me a Image with Text and I will scan Text from that image for u");
             hashMap.put("messageId", "RESPONSE");
+            hashMap.put("messageType", "text");
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
+            databaseReference.updateChildren(hashMap)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+
+                            } else {
+                                Toast.makeText(ChatsActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(ChatsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+        else if (botName.equals("Image Compressor")){
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("response", "Send me a Image and i will compress that image for u!!!");
+            hashMap.put("messageId", "RESPONSE");
+            hashMap.put("messageType", "text");
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
             databaseReference.updateChildren(hashMap)
@@ -572,6 +610,7 @@ public class ChatsActivity extends AppCompatActivity {
                                     HashMap<String, Object> hashMap = new HashMap<>();
                                     hashMap.put("response", "No text in this image");
                                     hashMap.put("messageId", "RESPONSE");
+                                    hashMap.put("messageType", "text");
 
                                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                                     databaseReference.updateChildren(hashMap)
@@ -595,6 +634,7 @@ public class ChatsActivity extends AppCompatActivity {
                                     HashMap<String, Object> hashMap = new HashMap<>();
                                     hashMap.put("response", ""+recognizedText);
                                     hashMap.put("messageId", "RESPONSE");
+                                    hashMap.put("messageType", "text");
 
                                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
                                     databaseReference.updateChildren(hashMap)
@@ -629,11 +669,80 @@ public class ChatsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-        }else {
+        }else if (botName.equals("Image Compressor")){
+            if (fileUri != null){
+                String filePathAndName = "compressed_Images/" + timestamp ;
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
+
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), fileUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 25, byteArrayOutputStream);
+                byte[] data = byteArrayOutputStream.toByteArray();
+
+                UploadTask uploadTask = storageReference.putBytes(data);
+
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ChatsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                });
+                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        if (taskSnapshot.getMetadata() != null){
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    if (uploadTask.isSuccessful()){
+                                        String downloadImageUri = uri.toString();
+                                        Map hashMap = new HashMap();
+                                        hashMap.put("imageUrl", "" + downloadImageUri);
+                                        hashMap.put("messageId", "RESPONSE");
+                                        hashMap.put("messageType", "image");
+
+                                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots");
+                                        databaseReference.child(botId).child("Messages").child(""+timestamp)
+                                                .setValue(hashMap)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+
+                                                        binding.progressBar.setVisibility(View.GONE);
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(ChatsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        binding.progressBar.setVisibility(View.GONE);
+                                                    }
+                                                });
+                                    }else {
+                                        Toast.makeText(ChatsActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
+        }
+        else {
 
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("response", "Nice Image!!!");
             hashMap.put("messageId", "RESPONSE");
+            hashMap.put("messageType", "text");
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bots").child(botId).child("Messages").child("" + timestamp);
             databaseReference.updateChildren(hashMap)
