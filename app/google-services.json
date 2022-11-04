@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "640655656011",
+    "project_id": "botchats-e8494",
+    "storage_bucket": "botchats-e8494.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640655656011:android:5e337abaa0e9bceb5139ce",
+        "android_client_info": {
+          "package_name": "kashyap.anurag.botchats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640655656011-ss7rbbsa7l08lfa12osqh07p66jogafc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP6jLyeDuY15-4w0Zn6kqnJBVGJrOvQiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640655656011-ss7rbbsa7l08lfa12osqh07p66jogafc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

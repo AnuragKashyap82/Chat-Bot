@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">BotChats</string>
+
+    <string-array name="hello">
+
+        <item>hii</item>
+        <item>hello</item>
+        <item>How are u?</item>
+        <item>How are u doing?</item>
+
+    </string-array>
+
+    <string-array name="name">
+
+        <item>Anurag</item>
+        <item>Rohan</item>
+        <item>Shivam</item>
+        <item>Rajesh</item>
+        <item>Dayanand</item>
+        <item>Chetan</item>
+        <item>Satyam</item>
+
+    </string-array>
+
+    <string-array name="coin">
+
+        <item>I flipped a coin and it landed on TAILS</item>
+        <item>I flipped a coin and it landed on HEADS</item>
+
+    </string-array>
+
+    <string-array name="howAreYou">
+
+        <item>"I'm doing fine, thanks!"</item>
+        <item>"I'm hungry..."</item>
+        <item>"Pretty good! How about you?"</item>
+
+    </string-array>
+
+</resources>
